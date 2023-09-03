@@ -4,17 +4,10 @@ import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
 // import { useEffect, useState } from 'react'
-
-// import { onReadListChange } from '@/app/components/reading-list'
 import { Button } from '@nextui-org/react'
 import { IconBookmarks, IconBookmarksOff, IconInfoSquareRoundedFilled } from '@tabler/icons-react'
 import { useBookmarks } from '../hooks/useBookmarks'
 
-/**
- *
- * @param {Book} book
- * @returns {JSX.Element}
- */
 export default function Book ({
   book
 }: {
@@ -41,9 +34,14 @@ export default function Book ({
   return (
     <div
       key={book.ISBN}
-      className="flex flex-col items-center gap-3 p-2 shadow-md ease-in-out hover:scale-105 hover:ease-in-out transition-all duration-300 rounded-md border-2 hover:border-blue-400 relative [&>button]:hidden [&>button]:hover:inline [&>a]:hidden [&>a]:hover:inline [&>img]:hover:brightness-50 cursor-pointer select-none group"
+      className="flex flex-col items-center gap-3 p-2 shadow-md ease-in-out hover:scale-105 hover:ease-in-out transition-all duration-300 rounded-md border-2 relative [&>button]:hidden [&>button]:hover:inline [&>a]:hidden [&>a]:hover:inline [&>img]:hover:brightness-50 cursor-pointer select-none group"
       style={{
-        boxShadow: `0 0 10px 0 ${theme === 'dark' ? '#ffffff66' : '#00000088'}`
+        boxShadow: `0 0 10px 0 ${isBookmarked(book.ISBN)
+          ? '#b29700'
+          : theme === 'dark' ? '#ffffff66' : '#00000088'}`,
+        border: `2px solid ${isBookmarked(book.ISBN)
+          ? '#b29700'
+          : theme === 'dark' ? '#ffffff66' : '#00000088'}`
       }}
     >
       <Button
@@ -55,6 +53,7 @@ export default function Book ({
             backgroundColor: isBookmarked(book.ISBN) ? '#ff0000' : '#3B82F6'
           }
         }
+        title={isBookmarked(book.ISBN) ? 'Remover de lista de lectura' : 'Agregar a lista de lectura'}
       >
         {!isBookmarked(book.ISBN) ? <IconBookmarks /> : <IconBookmarksOff />}
       </Button>
@@ -62,6 +61,7 @@ export default function Book ({
         <Button
           className="bg-blue-500 text-white px-2 rounded z-10"
           isIconOnly
+          title="Ver detalles"
         >
           <IconInfoSquareRoundedFilled />
         </Button>

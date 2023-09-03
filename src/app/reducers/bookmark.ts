@@ -1,9 +1,8 @@
-export const bookmarksInitialState = JSON.parse(localStorage.getItem('bookmarks') ?? '[]')
-
 export const BOOKMARKS_ACTIONS_TYPES = {
   ADD_BOOKMARK: 'ADD_BOOKMARK',
   REMOVE_BOOKMARK: 'REMOVE_BOOKMARK',
-  CLEAR_BOOKMARKS: 'CLEAR_BOOKMARKS'
+  CLEAR_BOOKMARKS: 'CLEAR_BOOKMARKS',
+  SET_BOOKMARKS: 'SET_BOOKMARKS'
 }
 
 export const updateLocalStorage = (bookmarks: string[]): void => {
@@ -27,6 +26,9 @@ export function bookmarksReducer (state: string[], action: Action): string[] {
       const clearBookmarks = [] as string[]
       updateLocalStorage(clearBookmarks)
       return clearBookmarks
+    }
+    case BOOKMARKS_ACTIONS_TYPES.SET_BOOKMARKS: {
+      return JSON.parse(action.payload)
     }
     default:
       return state

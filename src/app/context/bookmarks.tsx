@@ -1,16 +1,34 @@
+'use client'
+
 import { useReducer, createContext } from 'react'
-import { bookmarksReducer, bookmarksInitialState } from '../reducers/bookmark'
+import { bookmarksReducer } from '../reducers/bookmark'
+
+// const bookmarksInitialState =
+// JSON.parse(globalThis.localStorage.getItem('bookmarks') ?? '[]')
+const bookmarksInitialState: string[] = []
 
 export const BookmarksContext = createContext({
   state: bookmarksInitialState,
   addBookmark: (bookmark: string): void => { },
   removeBookmark: (bookmark: string): void => { },
   clearBookmarks: (): void => { },
-  isBookmarked: (bookmark: string): boolean => false
+  isBookmarked: (bookmark: string): boolean => false,
+  setBookmarks: (bookmarks: string): void => { }
 })
 
 function useBookmarks (): BookmarksContext {
   const [state, dispatch] = useReducer(bookmarksReducer, bookmarksInitialState)
+
+  const onStorageChange = (e: StorageEvent): void => {
+    const { key, newValue } = e
+    if (key === 'bookmarks' && newValue !== null) {
+      dispatch({ type: 'SET_BOOKMARKS', payload: newValue })
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('storage', onStorageChange)
+  }
 
   const addBookmark = (bookmark: string): void => {
     dispatch({ type: 'ADD_BOOKMARK', payload: bookmark })
@@ -28,12 +46,17 @@ function useBookmarks (): BookmarksContext {
     return state.includes(bookmark)
   }
 
+  const setBookmarks = (bookmarks: string): void => {
+    dispatch({ type: 'SET_BOOKMARKS', payload: bookmarks })
+  }
+
   return {
     state,
     addBookmark,
     removeBookmark,
     clearBookmarks,
-    isBookmarked
+    isBookmarked,
+    setBookmarks
   }
 }
 
@@ -43,7 +66,8 @@ export function BookmarksProvider ({ children }: { children: React.ReactNode }):
     addBookmark,
     removeBookmark,
     clearBookmarks,
-    isBookmarked
+    isBookmarked,
+    setBookmarks
   } = useBookmarks()
 
   return (
@@ -52,7 +76,8 @@ export function BookmarksProvider ({ children }: { children: React.ReactNode }):
       addBookmark,
       removeBookmark,
       clearBookmarks,
-      isBookmarked
+      isBookmarked,
+      setBookmarks
     }}
     >
       {children}

@@ -53,3 +53,11 @@ body * {
 #reading-list-container::-webkit-scrollbar {
   display: none;
 }
+
+.slide-in {
+  transform: translateX(0);
+}
+
+.slide-out {
+  transform: translateX(-100%);
+}

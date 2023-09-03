@@ -75,6 +75,26 @@
         },
         {
             "book": {
+                "title": "La Ciudad de Vapor",
+                "pages": 224,
+                "genre": "Ciencia ficción",
+                "cover": "https://www.planetadelibros.com.co/usuaris/libros/fotos/325/m_libros/324365_portada_la-ciudad-de-vapor_aa-vv_202009210918.jpg",
+                "synopsis": "Carlos Ruiz Zafón concibió está obra como un reconocimiento a sus lectores, que le habían seguido a lo largo de la saga iniciada con La Sombra del Viento.",
+                "year": 2020,
+                "ISBN": "978-0593314371",
+                "author": {
+                    "name": "Carlos Ruíz Zafón",
+                    "otherBooks": [
+                        "La Sombra del Viento",
+                        "El Juego del Ángel",
+                        "El Prisionero del Cielo",
+                        "El Laberinto de los Espíritus"
+                    ]
+                }
+            }
+        },
+        {
+            "book": {
                 "title": "Apocalipsis Zombie",
                 "pages": 444,
                 "genre": "Zombies",
@@ -228,6 +248,26 @@
                     "otherBooks": [
                         "El horror de Dunwich",
                         "En las montañas de la locura"
+                    ]
+                }
+            }
+        },
+        {
+            "book": {
+                "title": "Marina",
+                "pages": 304,
+                "genre": "Ciencia ficción",
+                "cover": "https://images.cdn2.buscalibre.com/fit-in/360x360/9d/0a/9d0a98b40f3de2cbafbee62a3be2e916.jpg",
+                "synopsis": "Oscar Drai, un joven estudiante de Barcelona conoce a Marina, una hermosa y misteriosa muchacha con la que se enfrenta a un mundo de secretos y mentiras. El misterio, la intriga y el amor son algunos de los ingredientes de esta novela del autor de La Sombra del Viento, que ha sido calificada de «macabra y fantástica a la par que preciosa» por la crítica.",
+                "year": 2009,
+                "ISBN": "978-8408084266",
+                "author": {
+                    "name": "Carlos Ruíz Zafón",
+                    "otherBooks": [
+                        "La Sombra del Viento",
+                        "El Juego del Ángel",
+                        "El Prisionero del Cielo",
+                        "El Laberinto de los Espíritus"
                     ]
                 }
             }

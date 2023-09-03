@@ -8,7 +8,9 @@ import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { useBookmarks } from '@/app/hooks/useBookmarks'
 
-export default function BookPage ({ params }: { params: { isbn: string } }): JSX.Element | null {
+export default function BookPage ({
+  params
+}: { params: { isbn: string } }): JSX.Element | null {
   const [mounted, setMounted] = useState(false)
   const { theme } = useTheme()
   const {
@@ -17,7 +19,8 @@ export default function BookPage ({ params }: { params: { isbn: string } }): JSX
     isBookmarked
   } = useBookmarks()
 
-  const book = data.library.find(({ book }: { book: Book }) => book.ISBN === params.isbn)?.book
+  const book = data.library.find(({ book }: { book: Book }) =>
+    book.ISBN === params.isbn)?.book
 
   const addOrRemoveBookmark = (isbn: string): void => {
     if (isBookmarked(isbn)) {
@@ -82,6 +85,7 @@ export default function BookPage ({ params }: { params: { isbn: string } }): JSX
         <Link href="/">
           <button
             className="bg-blue-500 text-white px-2 py-1 rounded"
+            title="Volver a la lista de libros"
           >
             <IconArrowBackUp />
           </button>
@@ -95,6 +99,7 @@ export default function BookPage ({ params }: { params: { isbn: string } }): JSX
               height: 'fit-content'
             }
           }
+          title={isBookmarked(book.ISBN) ? 'Remover de lista de lectura' : 'Agregar a lista de lectura'}
         >
           {!isBookmarked(book.ISBN) ? <IconBookmarks /> : <IconBookmarksOff />}
         </button>

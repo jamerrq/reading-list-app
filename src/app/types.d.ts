@@ -39,4 +39,5 @@ interface BookmarksContext {
   removeBookmark: (ISBN: string) => void
   clearBookmarks: () => void
   isBookmarked: (ISBN: string) => boolean
+  setBookmarks: (bookmarks: string) => void
 }
